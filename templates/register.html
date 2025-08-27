@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Register</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+</head>
+<body>
+  <div class="overlay"></div>
+
+  <nav class="navbar">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
+    </div>
+    <ul class="nav-links">
+      <li><a href="/login">Login</a></li>
+      <li><a href="/register">Register</a></li>
+      <li><a href="/aboutUs">About Us</a></li>
+      <li><a href="/contactUs">Contact Us</a></li>
+
+    </ul>
+  </nav>
+
+  <section class="form-section">
+    <div class="form-card">
+      <div class="form-header">
+        <img src="{{ url_for('static', filename='userIcon.png') }}" alt="User Icon">
+        <h2>User Register</h2>
+      </div>
+
+      <form method="POST" action="{{ url_for('register') }}">
+        <input type="text" name="username" placeholder="Enter Your Name" required>
+        <input type="number" name="age" placeholder="Enter Your Age (1-99)" required>
+        <input type="email" name="email" placeholder="Enter Email Address" required>
+        <input type="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">Register</button>
+      </form>
+
+      <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+    </div>
+  </section>
+</body>
+</html>

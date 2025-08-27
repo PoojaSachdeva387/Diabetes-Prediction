@@ -1,0 +1,374 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", sans-serif;
+  color: white;
+  background: url("backgroundImage.png") no-repeat center center fixed;
+  background-size: cover;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Overlay */
+.overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.55);
+  z-index: 1;
+}
+
+.about {
+  position: relative;
+  z-index: 2;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5%;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.2);
+  z-index: 10;
+}
+
+.logo img {
+  height: 45px;
+  max-width: 100%;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #ff4c4c;
+}
+
+.welcome-text {
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+/* Landing Section */
+.landing {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8% 5%;
+  min-height: 100vh;
+  position: relative;
+  z-index: 2;
+  gap: 5%;
+}
+
+/* Left Content */
+.content {
+  flex: 1;
+  animation: fadeInLeft 1s ease-out;
+}
+
+.content h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.content p {
+  margin: 1.5rem 0;
+  font-size: 1.25rem;
+}
+
+/* Form */
+form {
+  display: grid;
+  grid-template-columns: minmax(120px, 30%) 1fr;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+form label {
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+form input,
+form select {
+  padding: 0.8rem 1rem;
+  border: none;
+  border-radius: 25px;
+  background: #111;
+  color: white;
+  font-size: 1rem;
+  width: 100%;
+}
+
+form select {
+  background: #111 url("data:image/svg+xml;utf8,<svg fill='white' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat right 1rem center;
+  background-size: 16px;
+  padding-right: 2.5rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+form input::placeholder {
+  color: #aaa;
+}
+
+/* Predict Button */
+.btn {
+  grid-column: 1 / span 2;
+  justify-self: center;
+  padding: 0.9rem 2.5rem;
+  background: #79bbff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 1.5rem;
+}
+
+.btn:hover {
+  background: #1e90ff;
+}
+
+/* Prediction Output */
+#prediction {
+  grid-column: 1 / span 2;
+  margin-top: 1.2rem;
+  font-size: 1.1rem;
+}
+
+/* Right Image */
+.image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  animation: fadeInRight 1s ease-out;
+}
+
+.image-container img {
+  width: 80%;
+  max-width: 380px;
+  margin-top: 2rem;
+  border-radius: 20px;
+  box-shadow: 0px 8px 30px rgba(0,0,0,0.6);
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Welcome Containers */
+.welcome-container {
+  position: absolute;
+  top: 100px;
+  right: 2%;
+  z-index: 5;
+}
+
+.welcome-container-about {
+  position: absolute;
+  top: 60px;
+  right: 5%;
+  z-index: 5;
+}
+
+.welcome-text {
+  font-weight: bold;
+  font-size: 1rem;
+  background: rgba(0,0,0,0.4);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+}
+
+/* About Section */
+.about {
+  padding: 8% 5%;
+  text-align: center;
+  color: white;
+}
+
+.about-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.about-image img {
+  width: 90%;
+  max-width: 450px;
+  border-radius: 10px;
+  box-shadow: 0px 8px 30px rgba(0,0,0,0.6);
+}
+
+.about-text {
+  max-width: 600px;
+  text-align: left;
+  font-size: 1.25rem;
+}
+
+.about-text h2 {
+  margin-bottom: 1rem;
+}
+
+/* About Details */
+.about-details {
+  padding: 8% 5%;
+  color: white;
+  position: relative;
+  z-index: 2;
+  background: url("backgroundImage.jpg") center center / cover no-repeat fixed;
+}
+
+.about-details h1,
+.about-details h2 {
+  font-weight: bold;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.about-details p,
+.about-details ul,
+.about-details ol {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1.2rem;
+  border-radius: 12px;
+  margin: 1.2rem auto;
+  max-width: 1000px;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+.about-image-centered img {
+  width: 90%;
+  max-width: 600px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+  margin: 2rem auto;
+  display: block;
+}
+
+/* Read More */
+.read-more-content {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.6s ease-in-out, opacity 0.5s ease-in-out;
+  margin-top: 2rem;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+.read-more-content.show {
+  max-height: 1500px;
+  opacity: 1;
+}
+
+.read-more-btn {
+  display: inline-block;
+  margin-top: 5.5rem;
+  padding: 0.8rem 2rem;
+  background: #79bbff;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.read-more-btn:hover {
+  background: #1e90ff;
+}
+
+form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.8rem 0;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .landing {
+    flex-direction: column;
+    text-align: center;
+    padding: 6% 5%;
+    padding-top: 6rem;
+  }
+  .content, .image-container {
+    width: 100%;
+  }
+  .content h1 {
+    font-size: 2rem;
+  }
+  .image-container img {
+    max-width: 300px;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Mobiles */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0.8rem 1rem;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .landing {
+    padding: 5% 1rem;
+    padding-top: 14rem;
+  }
+  form {
+    grid-template-columns: 1fr;
+  }
+  .btn {
+    width: 100%;
+  }
+  .about-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .about-text {
+    font-size: 1rem;
+  }
+}

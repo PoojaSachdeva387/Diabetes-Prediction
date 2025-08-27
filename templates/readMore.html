@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Read More - About Us</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <!-- overlay for readability -->
+  <div class="overlay"></div>
+
+  <!-- Navbar -->
+<!--  <header>-->
+<!--&lt;!&ndash;    <nav class="navbar">&ndash;&gt;-->
+<!--&lt;!&ndash;      <div class="logo">&ndash;&gt;-->
+<!--&lt;!&ndash;        <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">&ndash;&gt;-->
+<!--&lt;!&ndash;      </div>&ndash;&gt;-->
+<!--&lt;!&ndash;      <ul class="nav-links">&ndash;&gt;-->
+<!--&lt;!&ndash;        <li><a href="{{ url_for('login') }}">Login</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;        <li><a href="/logout">Logout</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;      </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;    </nav>&ndash;&gt;-->
+
+<!--    <div class="welcome-container-about">-->
+<!--      <p class="welcome-text">WELCOME: {{username}}</p>-->
+<!--    </div>-->
+<!--  </header>-->
+
+  <!-- About Us Full Page -->
+  <section class="about-details">
+    <h1>ABOUT US:</h1>
+    <h2>Empowering proactive healthcare through advanced prediction</h2>
+
+    <div class="about-image-centered">
+      <img src="{{ url_for('static', filename='aboutUsImg.png') }}" alt="About Us">
+    </div>
+
+    <h2>OBJECTIVE</h2>
+    <p>
+      The goal of this research is to create a precise and trustworthy machine learning model for the
+      early diagnosis of heart disease and diabetes in patients. Heart disease is the world's biggest
+      cause of death and includes illnesses including coronary artery disease, myocardial infarction,
+      and congestive heart failure. However, due to its complex nature and the existence of various risk
+      factors, diagnosing heart disease can be difficult. On the other hand the global prevalence of
+      diabetes is rising quickly. By merging the findings of several machine learning techniques, the
+      goal of this study is to create a system that can accurately predict a patient's early onset of
+      diabetes and heart disease.
+    </p>
+
+    <p>
+      Our project intends to address this issue by utilising machine learning techniques to analyse and
+      forecast the likelihood of those diseases in individuals based on a collection of clinical and
+      demographic variables. The system should be able to classify patients as either having heart disease or
+      not, based on the available data , like restecg, exang, cholesterol level etc or patients either having
+      diabetes or not based on the available data like age, hypertension, bmi, blood glucose level etc.
+    </p>
+
+    <p>
+      The system would build a robust machine learning model that can accurately predict the chances of heart
+      disease and diabetes in an individual human being based either on the previous data or by taking the data
+      from the user. After taking the dataset we applied the model over it.
+    </p>
+
+    <p>
+      This model contain various types of data, such as numerical, categorical, and binary, and should be
+      trained on a comprehensive dataset to ensure its effectiveness.The project aims to utilize machine
+      learning algorithms, such as logistic regression , decision tree model and random forest model.
+    </p>
+
+    <ol>
+      <li>Detect the presence or risk of heart disease and diabetes in patients based on their medical attributes or reports.</li>
+      <li>Predict whether a patient should be diagnosed with those diseases using various classification machine learning algorithms.</li>
+      <li>It also be used in predicting those diseases by building an optimized model with the help of machine learning algorithms.</li>
+      <li>Use data analysis and predictive analytics to prepare data for modeling, training, confusion matrix, and predictions.</li>
+    </ol>
+
+    <h2>WHY THE PARTICULAR TOPIC IS CHOSEN?</h2>
+    <ul>
+      <li><b>Impact of Heart Disease:</b> Major cause of death worldwide... (~17.9 million deaths each year according to WHO).</li>
+      <li><b>Impact of Diabetes:</b> Widespread and growing health issue... project could contribute to early detection and intervention.</li>
+      <li><b>Learning across disciplines:</b> Combines machine learning, statistics, and medical expertise.</li>
+      <li><b>Continuous learning:</b> Research is ongoing, offering opportunities to continuously improve the model.</li>
+      <li><b>Career prospects:</b> Growing demand for healthcare AI experts.</li>
+      <li><b>Research Opportunities:</b> Foundation for predictive modeling for other conditions or advanced AI techniques.</li>
+    </ul>
+
+    <div class="about-image-centered">
+      <img src="{{ url_for('static', filename='doctor.jpg') }}" alt="Doctor" style="max-width:500px;">
+    </div>
+
+    <h2>CONTRIBUTION TO THE WORLD</h2>
+    <ul>
+      <li><b>Healthcare Advancements:</b> Assists medical professionals in early detection and intervention.</li>
+      <li><b>Research and Innovation:</b> Adds to the body of ML + healthcare research.</li>
+      <li><b>Improved Accuracy:</b> Reduces misdiagnosis by using optimized models.</li>
+      <li><b>Early Detection:</b> Enables timely treatment and prevention.</li>
+      <li><b>Comparative Analysis:</b> Evaluates multiple ML algorithms for best performance.</li>
+    </ul>
+
+    <div class="about-image-centered">
+      <img src="{{ url_for('static', filename='contribution.png') }}" alt="Contribution" style="max-width:400px;">
+    </div>
+
+  </section>
+</body>
+</html>

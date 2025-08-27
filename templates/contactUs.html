@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link rel="stylesheet" href="../static/register.css">
+</head>
+<body>
+  <!-- Overlay -->
+  <div class="overlay"></div>
+
+  <!-- Navbar -->
+<!--  <nav class="navbar">-->
+<!--    <div class="logo">-->
+<!--      <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">-->
+<!--    </div>-->
+<!--    <ul class="nav-links">-->
+<!--      <li><a href="{{ url_for('login') }}">Login</a></li>-->
+<!--      <li><a href="#">Services</a></li>-->
+<!--      <li><a href="{{ url_for('contact') }}">Contact</a></li>-->
+<!--    </ul>-->
+<!--  </nav>-->
+
+  <!-- Contact Form Section -->
+  <section class="form-section">
+    <div class="form-card">
+      <div class="form-header">
+        <img src="{{ url_for('static', filename='userIcon.png') }}" alt="Contact Icon">
+        <h2>Contact Us</h2>
+      </div>
+
+      <form method="POST" action="{{ url_for('contact') }}">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+</body>
+</html>

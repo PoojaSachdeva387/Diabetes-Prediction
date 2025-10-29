@@ -4,25 +4,47 @@ import os
 import warnings
 import pickle
 import pandas as pd
+import traceback 
 
 warnings.filterwarnings('ignore')
 app = Flask(__name__)
 app.secret_key = os.urandom(24) 
 
 USERS_FILE = "users.json"
+MODELS = {} 
+
+# --- Model Loading Logic ---
+try:
+    MODELS['diabetes_model'] = pickle.load(open("rf.pkl", "rb"))
+    MODELS['diabetes_scaler'] = pickle.load(open("scaler.pkl", "rb"))
+    MODELS['diabetes_encoder'] = pickle.load(open("encoder.pkl", "rb"))
+    print("Diabetes (RF) Model, scaler, and encoder loaded successfully!")
+except Exception as e:
+    print(f"Error loading Diabetes assets: {e}")
 
 try:
-    model = pickle.load(open("rf.pkl", "rb"))
-    scaler = pickle.load(open("scaler.pkl", "rb"))
-    encoder = pickle.load(open("encoder.pkl", "rb"))
-    print("Model, scaler, and encoder loaded successfully!")
+    MODELS['hd_model'] = pickle.load(open("hd_model.pkl", "rb"))
+    print("Heart Disease Model loaded successfully!")
+except FileNotFoundError:
+    print("Warning: hd_model.pkl not found. Heart Disease Prediction will be unavailable.")
+    MODELS['hd_model'] = None
 except Exception as e:
-    print(f"Error loading files: {e}")
-    model, scaler, encoder = None, None, None
+    print(f"Error loading Heart Disease assets: {e}")
+    MODELS['hd_model'] = None
+    
+# Check if necessary models are loaded
+if not all(key in MODELS for key in ['diabetes_model', 'diabetes_scaler', 'diabetes_encoder']):
+    print("FATAL: Required Diabetes assets not fully loaded.")
+if MODELS['hd_model'] is None:
+    print("INFO: Heart Disease prediction functions will use an uninitialized model.")
+
 
 
 @app.route("/diabetesPrediction", methods=["POST"])
 def diabetesPrediction():
+    model = MODELS.get('diabetes_model')
+    scaler = MODELS.get('diabetes_scaler')
+    encoder = MODELS.get('diabetes_encoder')
     if model is None or scaler is None:
         return "Model or scaler not available"
     try:
@@ -79,6 +101,48 @@ def diabetesPrediction():
         return f"Error in prediction: {str(e)}"
 
 
+@app.route("/heartDiseasePrediction", methods=["POST"])
+def heartDiseasePrediction():
+    model = MODELS.get('hd_model')
+    
+    if model is None:
+        return "Model for Heart Disease not available"
+        
+    try:
+        age = int(request.form.get("age"))
+        chestpain = int(request.form.get("chestpain"))
+        trestbps = int(request.form.get("trestbps"))
+        chol = int(request.form.get("chol"))
+        restecg = int(request.form.get("restecg"))
+        thalch = int(request.form.get("thalch"))
+        exang = int(request.form.get("exang"))
+        fbs = int(request.form.get("fbs"))
+        oldpeak = float(request.form.get("oldpeak")) 
+        slope = int(request.form.get("slope"))
+        ca = int(request.form.get("ca"))
+        thal = int(request.form.get("thal"))
+        
+        # Collect data for prediction
+        data = [[age, chestpain, trestbps, chol, restecg, thalch, exang, fbs, oldpeak, slope, ca, thal]]
+        
+        # The model requires a DataFrame with specific column names
+        df_predict = pd.DataFrame(data,
+                                  columns=['age', 'chest pain', 'trestbps', 'chol', 'restecg', 'thalch',
+                                           'exang', 'fbs', 'oldpeak', 'slope', 'ca', 'thal'])
+
+       
+
+        predictions = model.predict(df_predict)
+        
+        print(f"Heart Disease Prediction: {predictions[0]}")
+        return str(predictions[0])
+
+    except Exception as e:
+        print(f"Error in heart disease prediction: {e}")
+        traceback.print_exc()
+        return f"Error in heart disease prediction: {str(e)}"
+
+
 def load_users():
     if not os.path.exists(USERS_FILE):
         return {"users": []}
@@ -112,33 +176,52 @@ def login():
             session['userid'] = users[0]['email']
             session['username'] = users[0]['username']
             flash("Login successful!", "success")
-            return render_template("diabetes.html")
+            # Redirect to a new home page for choice
+            return redirect(url_for("home"))
         else:
             flash("Invalid email or password", "danger")
             return redirect(url_for("login"))
 
     return render_template("login.html")
 
+
+@app.route('/home')
+def home():
+    if 'username' not in session:
+        flash("Please log in to access the prediction tools.", "info")
+        return redirect(url_for("login"))
+    return render_template("home.html", username=session.get('username'))
+
+
 @app.route('/diabetes')
 def diabetes():
-    name = session.get('name')
-    return render_template("diabetes.html", username=name)
+    if 'username' not in session:
+        flash("Please log in to access the prediction tools.", "info")
+        return redirect(url_for("login"))
+    return render_template("diabetes.html", username=session.get('username'))
+
+@app.route('/heartdisease')
+def heartdisease():
+    if 'username' not in session:
+        flash("Please log in to access the prediction tools.", "info")
+        return redirect(url_for("login"))
+    return render_template("heartdisease.html", username=session.get('username'))
 
 
 @app.route('/contactUs')
 def contactUs():
-    name = session.get('name')
+    name = session.get('username')
     return render_template("contactUs.html", username=name)
 
 
 @app.route('/aboutUs')
 def aboutUs():
-    name = session.get('name')
+    name = session.get('username')
     return render_template("aboutUs.html", username=name)
 
 @app.route('/readMore')
 def readMore():
-    name = session.get('name')
+    name = session.get('username')
     return render_template("readMore.html", username=name)
 
 CONTACT_FILE = "contactdetails.json"
@@ -212,6 +295,12 @@ def logout():
     return redirect(url_for("login"))
 
 
-
 if __name__ == "__main__":
+    if not os.path.exists("rf.pkl"):
+        print("Creating placeholder files. Remember to replace them with your actual trained models!")
+        with open("rf.pkl", "wb") as f: pickle.dump("dummy_rf", f)
+        with open("scaler.pkl", "wb") as f: pickle.dump("dummy_scaler", f)
+        with open("encoder.pkl", "wb") as f: pickle.dump("dummy_encoder", f)
+        with open("hd_model.pkl", "wb") as f: pickle.dump("dummy_hd", f)
+
     app.run(debug=True)

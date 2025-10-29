@@ -5,6 +5,12 @@
             "age": "21",
             "email": "varun@gmail.com",
             "password": "1234"
+        },
+        {
+            "username": "pooja",
+            "age": "20",
+            "email": "pooja@gmail.com",
+            "password": "1234"
         }
     ]
 }

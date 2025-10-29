@@ -7,27 +7,24 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheet.css') }}">
 </head>
 <body>
-  <!-- Overlay for readability -->
   <div class="overlay"></div>
 
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">
       <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo">
     </div>
     <ul class="nav-links">
+      <li><a href="/home">Home</a></li> 
       <li><a href="/aboutUs">About Us</a></li>
       <li><a href="/contactUs">Contact Us</a></li>
       <li><a href="/logout">Logout</a>
     </ul>
   </nav>
 
-  <!-- Username under navbar -->
   <div class="welcome-container">
     <span class="welcome-text">WELCOME: {{ session['username'] }}</span>
   </div>
 
-  <!-- Prediction Section -->
   <section class="landing">
     <div class="content">
       <h1>DIABETES PREDICTOR</h1>
@@ -106,9 +103,8 @@
           if (xhr.status === 200) {
             if (xhr.responseText.trim() === "1") {
               let text = "<span style='color: blue;'>PLEASE CONSULT WITH DOCTOR</span>";
-              let result = text.link("/dconsult");
               document.getElementById("prediction").innerHTML =
-                "<span style='color: green;'>PREDICTION: POSITIVE!!<br></span>" + result;
+                "<span style='color: black;'>PREDICTION: POSITIVE!!<br></span>" + text;
             } else if (xhr.responseText.trim() === "0") {
               document.getElementById("prediction").innerHTML =
                 "<span style='color: red;'>PREDICTION: NEGATIVE!!<br></span>DONT WORRY YOU ARE HEALTHY";
